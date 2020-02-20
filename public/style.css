@@ -1,0 +1,35 @@
+body{
+    font-family: 'Courier New', Courier, monospace;
+}
+.obj_on_disk{
+    margin: 10px;
+    margin-left: 0px;
+}
+.modello{
+    margin-bottom: 0px;
+}
+
+.marca{
+    margin: 0px;
+}
+
+.date{
+    margin: 0px;
+}
+
+.titolo{
+    margin-bottom: 0px;
+}
+
+.intestazione{
+    display: inline;
+}
+
+.intestazione2{
+    margin-left: 160px;
+    display: inline;
+}
+
+#clock{
+    display: inline;
+}
