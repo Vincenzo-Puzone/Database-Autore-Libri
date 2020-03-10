@@ -16,8 +16,6 @@ app.use('/css', express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use( morgan('dev') );
 
-let autori=[];
-let libri=[];
 const db = new sqlite3.Database('./test.db',()=>{
     app.listen(8080);
     console.log('Server running on http://localhost:8080');
@@ -25,14 +23,9 @@ const db = new sqlite3.Database('./test.db',()=>{
 });
 
 app.get('/',(req,res)=>{
-    sqlA='select * from Autori';
-    sqlL='select * from Libri';
-    db.all(sqlA,(err,aRows)=>{
-        db.all(sqlL,(err,lRows)=>{
-            libri=lRows;
-            autori=aRows;
-            res.render("index",{autori,libri});
-        });
+    sql='select * from Autori INNER JOIN Libri ON id_autore=autore';
+    db.all(sql,(err,rows)=>{
+        res.render('index',{rows})
     });
 });
 

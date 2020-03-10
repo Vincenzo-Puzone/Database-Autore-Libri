@@ -23,46 +23,42 @@ const db = new sqlite3.Database('./test.db',()=>{
 });
 
 app.get('/',(req,res)=>{
-    sqlA='select * from Autori';
-    sqlL='select * from Libri';
-    db.all(sqlA,(err,aRows)=>{
-        db.all(sqlL,(err,lRows)=>{
-            res.render("admin",{aRows,lRows});
-        });
+    sql='select * from Autori INNER JOIN Libri ON id_autore=autore';
+    db.all(sql,(err,rows)=>{
+        res.render('admin',{rows})
     });
 });
 
-app.get('/modifica/autore/:id',(req,res)=>{
-    sqlA=`select * from Autori where id = ${req.params.id}`;
+app.get('/modifica/autore/:ID_autore',(req,res)=>{
+    sqlA=`select * from Autori where id_autore = ${req.params.ID_autore}`;
     db.each(sqlA,(err,aRow)=>{
         res.render('modAutori',{autore:aRow});
     });
 });
 
 app.post('/modautore',(req,res)=>{
-    const id=parseInt(req.body.id);
-    sql=`UPDATE Autori SET nome='${req.body.nome}',cognome='${req.body.cognome}' WHERE Autori.id = ${id}`;
+    const id=parseInt(req.body.ID_autore);
+    sql=`UPDATE Autori SET nome='${req.body.nome}',cognome='${req.body.cognome}' WHERE Autori.id_autore = ${id}`;
     db.run(sql)
     res.redirect("/");
 });
 
 app.post('/addautore',(req,res)=>{
-    const id=parseInt(req.body.id);
-    let sql = `INSERT INTO Autori(id,nome,cognome) VALUES(${id},'${req.body.nome}','${req.body.cognome}')`;
-    console.log(sql)
+    const id=parseInt(req.body.id_autore);
+    let sql = `INSERT INTO Autori(id_autore,nome,cognome) VALUES(${id},'${req.body.nome}','${req.body.cognome}')`;
     db.run(sql);
     res.redirect('/');
 });
 
 app.post('/delautori',(req,res)=>{
-    const id=parseInt(req.body.id);
-    let sql = `DELETE FROM Autori WHERE Autori.id=${id}`;
+    const id=parseInt(req.body.id_autore);
+    let sql = `DELETE FROM Autori WHERE Autori.id_autore=${id}`;
     db.run(sql)
     res.redirect('/');
 });
 
 app.get('/modifica/libro/:id',(req,res)=>{
-    sql=`select * from Libri where id = ${req.params.id}`;
+    sql=`select * from Libri where id_libro = ${req.params.id}`;
     db.each(sql,(err,row)=>{
         sqlA='select * from Autori';
         db.all(sqlA,(err,aRows)=>{
@@ -72,24 +68,24 @@ app.get('/modifica/libro/:id',(req,res)=>{
 });
 
 app.post('/modlibro',(req,res)=>{
-    const id=parseInt(req.body.id);
-    const id_autore=parseInt(req.body.id_autore);
-    sql=`UPDATE Libri SET titolo='${req.body.titolo}', id_autore=${id_autore} WHERE Libri.id = ${id}`;
+    const id=parseInt(req.body.ID_libro);
+    const autore=parseInt(req.body.autore);
+    sql=`UPDATE Libri SET titolo='${req.body.titolo}', autore=${autore} WHERE Libri.id_libro = ${id}`;
     db.run(sql)
     res.redirect("/");
 });
 
 app.post('/addlibri',(req,res)=>{
-    const id_autore=parseInt(req.body.id_autore);
-    const id=parseInt(req.body.id);
-    let sql = `INSERT INTO Libri(id,titolo,id_autore) VALUES(${id},'${req.body.titolo}','${id_autore}')`;
+    const autore=parseInt(req.body.autore);
+    const id=parseInt(req.body.id_libro);
+    let sql = `INSERT INTO Libri(id_libro,titolo,autore) VALUES(${id},'${req.body.titolo}','${autore}')`;
     db.run(sql);
     res.redirect('/');
 });
 
 app.post('/dellibri',(req,res)=>{
-    const id=parseInt(req.body.id);
-    let sql = `DELETE FROM Libri WHERE Libri.id=${id}`;
+    const id=parseInt(req.body.id_libro);
+    let sql = `DELETE FROM Libri WHERE Libri.id_libro=${id}`;
     db.run(sql)
     res.redirect('/');
 });

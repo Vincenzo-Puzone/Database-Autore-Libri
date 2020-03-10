@@ -9,11 +9,11 @@
         <p><a href="/">Ritorna Home page</a></p>
         <p class="intestazione">Titolo</p>
         <form method="POST" action="/modlibro">
-            <input type="hidden" name="id" value="<%= libro.id %>">
+            <input type="hidden" name="ID_libro" value="<%= libro.ID_libro %>">
             <input type="text" name="titolo" value="<%= libro.titolo %>">
-            <select name="id_autore">
+            <select name="autore">
             <% aRows.forEach(autore => { %>
-                <option value="<%= autore.id %>" > <%= autore.id %> - <%= autore.nome %> </option>
+                <option value="<%= autore.ID_autore %>" > <%= autore.ID_autore %> - <%= autore.nome %> </option>
             <% }) %> 
             </select> 
             <input type="submit" value="Modifica">

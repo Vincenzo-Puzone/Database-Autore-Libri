@@ -16,21 +16,21 @@
                 <td>Modifica</td>
                 <td>Elimina</td>
             </tr>
-            <% aRows.forEach(autore => { %>
+            <% rows.forEach(autore => { %>
                 <tr>
-                    <td> <%= autore.id %> </td>
+                    <td> <%= autore.ID_autore %> </td>
                     <td> <%= autore.nome %> </td>
                     <td> <%= autore.cognome %> </td>
-                    <td><a href="/modifica/autore/<%= autore.id %> ">Modifica</a></td>
+                    <td><a href="/modifica/autore/<%= autore.ID_autore %> ">Modifica</a></td>
                     <form action="/delautori" method="POST">
-                        <input type="hidden" name="id" value="<%= autore.id %> ">
+                        <input type="hidden" name="id_autore" value="<%= autore.ID_autore %> ">
                         <td> <input type="submit" value="Elimina"></td>
                     </form>
                 </tr>
             <% }) %>
             <form action="/addautore" method="POST">
                 <tr>
-                    <td> <input type="text" name="id" value=""> </td>
+                    <td> <input type="text" name="id_autore" value=""> </td>
                     <td> <input type="text" name="nome" value=""> </td>
                     <td> <input type="text" name="cognome" value=""> </td>
                     <td> <input type="submit" value="Aggiungi"> </td>
@@ -49,25 +49,25 @@
                 <td>Modifica</td>
                 <td>Elimina</td>
             </tr>
-            <% lRows.forEach(libro => { %>
+            <% rows.forEach(libro => { %>
                 <tr>
-                    <td> <%= libro.id %> </td>
+                    <td> <%= libro.ID_libro %> </td>
                     <td> <%= libro.titolo %> </td>
-                    <td> <%= libro.id_autore %> </td>
-                    <td><a href="/modifica/libro/<%= libro.id %> ">Modifica</a></td>
+                    <td> <%= libro.autore %> </td>
+                    <td><a href="/modifica/libro/<%= libro.ID_libro %> ">Modifica</a></td>
                     <form action="/dellibri" method="POST">
-                        <input type="hidden" name="id" value="<%= libro.id %> ">
+                        <input type="hidden" name="id_libro" value="<%= libro.ID_libro %> ">
                         <td> <input type="submit" value="Elimina"></td>
                     </form>
                 </tr>
             <% }) %>
             <form action="/addlibri" method="POST">
                 <tr>
-                    <td> <input type="text" name="id" value=""> </td>
+                    <td> <input type="text" name="id_libro" value=""> </td>
                     <td> <input type="text" name="titolo" value=""> </td>
-                    <td> <select name="id_autore">
-                        <% aRows.forEach(autore => { %>
-                            <option value="<%= autore.id %>" > <%= autore.id %> - <%= autore.nome %> </option>
+                    <td> <select name="autore">
+                        <% rows.forEach(autore => { %>
+                            <option value="<%= autore.ID_autore %>" > <%= autore.ID_autore %> - <%= autore.nome %> </option>
                         <% }) %> 
                         </select>   
                     </td>

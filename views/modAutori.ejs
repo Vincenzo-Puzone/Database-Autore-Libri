@@ -7,10 +7,10 @@
     </head>
     <body>
         <p><a href="/">Ritorna Home page</a></p>
-        <p class="intestazione">Modello</p>
-        <p class="intestazione2">Marca</p>
+        <p class="intestazione">Nome</p>
+        <p class="intestazione2">Cognome</p>
         <form method="POST" action="/modautore">
-            <input type="hidden" name="id" value="<%= autore.id %>">
+            <input type="hidden" name="ID_autore" value="<%= autore.ID_autore %>">
             <input type="text" name="nome" value="<%= autore.nome %>">
             <input type="text" name="cognome" value="<%= autore.cognome %>">
             <input type="submit" value="Modifica">
