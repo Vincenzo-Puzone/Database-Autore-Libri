@@ -6,15 +6,22 @@
     <title>Libri</title>
 </head>
 <body>
-    <% autori.forEach(autore => { %>
-        <div class="autore">
-            <p>Autore: <%= autore.nome %> </p>
-            <% libri.forEach(libro => { %>
-                <ul>
-                    <li>Titolo: <%= libro.titolo %> </li>
-                </ul>
-            <% }) %>
-        </div>
-    <% }) %>
+    <div class="libri">
+        <% libri.forEach(libro => { %>
+             <ul>
+                <li>Titolo: <%= libro.titolo %> </li>
+                <li>Autore: <%= libro.id_autore %> </li>
+            </ul>
+        <% }) %>
+    </div>
+    <div class="autori">
+        <p>Autori</p>
+        <% autori.forEach(autore => { %>
+            <ul>
+                <li>ID: <%= autore.id %> </li>
+                <li>Nome: <%= autore.nome %> </li>
+            </ul>
+        <% }) %>
+    </div>
 </body>
 </html>
