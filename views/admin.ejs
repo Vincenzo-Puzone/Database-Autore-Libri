@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="autori">
+        <h1>Autori</h1>
+        <table style="width:100%">
+            <tr>
+                <td>ID</td>
+                <td>Nome</td>
+                <td>Cognome</td>
+                <td>Modifica</td>
+                <td>Elimina</td>
+            </tr>
+            <% aRows.forEach(autore => { %>
+                <tr>
+                    <td> <%= autore.id %> </td>
+                    <td> <%= autore.nome %> </td>
+                    <td> <%= autore.cognome %> </td>
+                    <td><a href="/modifica/autore/<%= autore.id %> ">Modifica</a></td>
+                    <form action="/delautori" method="POST">
+                        <input type="hidden" name="id" value="<%= autore.id %> ">
+                        <td> <input type="submit" value="Elimina"></td>
+                    </form>
+                </tr>
+            <% }) %>
+            <form action="/addautore" method="POST">
+                <tr>
+                    <td> <input type="text" name="id" value=""> </td>
+                    <td> <input type="text" name="nome" value=""> </td>
+                    <td> <input type="text" name="cognome" value=""> </td>
+                    <td> <input type="submit" value="Aggiungi"> </td>
+                    <td></td>
+                </tr>
+            </form>
+        </table>
+    </div>
+    <div class="libri">
+        <h1>Libri</h1>
+        <table style="width:100%">
+            <tr>
+                <td>ID</td>
+                <td>Titolo</td>
+                <td>id_autore</td>
+                <td>Modifica</td>
+                <td>Elimina</td>
+            </tr>
+            <% lRows.forEach(libro => { %>
+                <tr>
+                    <td> <%= libro.id %> </td>
+                    <td> <%= libro.titolo %> </td>
+                    <td> <%= libro.id_autore %> </td>
+                    <td><a href="/modifica/libro/<%= libro.id %> ">Modifica</a></td>
+                    <form action="/dellibri" method="POST">
+                        <input type="hidden" name="id" value="<%= libro.id %> ">
+                        <td> <input type="submit" value="Elimina"></td>
+                    </form>
+                </tr>
+            <% }) %>
+            <form action="/addlibri" method="POST">
+                <tr>
+                    <td> <input type="text" name="id" value=""> </td>
+                    <td> <input type="text" name="titolo" value=""> </td>
+                    <td> <select name="id_autore">
+                        <% aRows.forEach(autore => { %>
+                            <option value="<%= autore.id %>" > <%= autore.id %> - <%= autore.nome %> </option>
+                        <% }) %> 
+                        </select>   
+                    </td>
+                    <td> <input type="submit" value="Aggiungi"> </td>
+                    <td></td>
+                </tr>
+            </form>
+        </table>
+    </div>
+</body>
+</html>

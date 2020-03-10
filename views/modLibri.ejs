@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="it">
+    <head>
+        <meta charset="utf-8">
+        <title>Modifica PC</title>
+        <link rel="stylesheet" href="/css/style.css" type="text/css"> 
+    </head>
+    <body>
+        <p><a href="/">Ritorna Home page</a></p>
+        <p class="intestazione">Titolo</p>
+        <form method="POST" action="/modlibro">
+            <input type="hidden" name="id" value="<%= libro.id %>">
+            <input type="text" name="titolo" value="<%= libro.titolo %>">
+            <select name="id_autore">
+            <% aRows.forEach(autore => { %>
+                <option value="<%= autore.id %>" > <%= autore.id %> - <%= autore.nome %> </option>
+            <% }) %> 
+            </select> 
+            <input type="submit" value="Modifica">
+        </form>
+    </body>
+</html>

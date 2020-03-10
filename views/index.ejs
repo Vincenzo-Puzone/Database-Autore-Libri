@@ -2,9 +2,19 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
     <title>Libri</title>
 </head>
 <body>
-    
+    <% autori.forEach(autore => { %>
+        <div class="autore">
+            <p>Autore: <%= autore.nome %> </p>
+            <% libri.forEach(libro => { %>
+                <ul>
+                    <li>Titolo: <%= libro.titolo %> </li>
+                </ul>
+            <% }) %>
+        </div>
+    <% }) %>
 </body>
 </html>
