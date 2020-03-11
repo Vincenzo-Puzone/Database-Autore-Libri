@@ -6,6 +6,9 @@
     <title>Document</title>
 </head>
 <body>
+    <form method="POST" action="/creadb">
+        <input type="submit" value="Crea DB">
+    </form>
     <div class="autori">
         <h1>Autori</h1>
         <table style="width:100%">
@@ -16,18 +19,21 @@
                 <td>Modifica</td>
                 <td>Elimina</td>
             </tr>
-            <% autori.forEach(autore => { %>
-                <tr>
-                    <td> <%= autore.ID_autore %> </td>
-                    <td> <%= autore.nome %> </td>
-                    <td> <%= autore.cognome %> </td>
-                    <td><a href="/modifica/autore/<%= autore.ID_autore %> ">Modifica</a></td>
-                    <form action="/delautori" method="POST">
-                        <input type="hidden" name="id_autore" value="<%= autore.ID_autore %> ">
-                        <td> <input type="submit" value="Elimina"></td>
-                    </form>
-                </tr>
-            <% }) %>
+            <% if (typeof autori !== 'undefined') { %>
+             <% autori.forEach(autore => { %>
+                    <tr>
+                        <td> <%= autore.ID_autore %> </td>
+                        <td> <%= autore.nome %> </td>
+                        <td> <%= autore.cognome %> </td>
+                        <td><a href="/modifica/autore/<%= autore.ID_autore %> ">Modifica</a></td>
+                        <form action="/delautori" method="POST">
+                            <input type="hidden" name="id_autore" value="<%= autore.ID_autore %> ">
+                            <td> <input type="submit" value="Elimina"></td>
+                        </form>
+                    </tr>
+                <% }) %>
+            <% } %>
+                
             <form action="/addautore" method="POST">
                 <tr>
                     <td> <input type="text" name="id_autore" value=""> </td>
@@ -49,7 +55,8 @@
                 <td>Modifica</td>
                 <td>Elimina</td>
             </tr>
-            <% libri.forEach(libro => { %>
+            <% if (typeof libri !== 'undefined') { %>
+             <% libri.forEach(libro => { %>
                 <tr>
                     <td> <%= libro.ID_libro %> </td>
                     <td> <%= libro.titolo %> </td>
@@ -61,14 +68,19 @@
                     </form>
                 </tr>
             <% }) %>
+            <% } %>
+            
             <form action="/addlibri" method="POST">
                 <tr>
                     <td> <input type="text" name="id_libro" value=""> </td>
                     <td> <input type="text" name="titolo" value=""> </td>
                     <td> <select name="autore">
-                        <% autori.forEach(autore => { %>
-                            <option value="<%= autore.ID_autore %>" > <%= autore.ID_autore %> - <%= autore.nome %> </option>
-                        <% }) %> 
+                        <% if (typeof autori !== 'undefined') { %>
+                         <% autori.forEach(autore => { %>
+                                <option value="<%= autore.ID_autore %>" > <%= autore.ID_autore %> - <%= autore.nome %> </option>
+                            <% }) %> 
+                        <% } %>
+                            
                         </select>   
                     </td>
                     <td> <input type="submit" value="Aggiungi"> </td>
