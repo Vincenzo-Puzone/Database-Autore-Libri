@@ -1,11 +1,9 @@
 const express = require('express');
 const morgan = require('morgan');
 const path = require('path');
-const bodyParser = require('body-parser');    
-const moment = require('moment');
+const bodyParser = require('body-parser');
 const favicon = require('serve-favicon');
 const sqlite3 = require('sqlite3');
-moment.locale('it');
 
 app = express();
 
