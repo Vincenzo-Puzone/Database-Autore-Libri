@@ -6,15 +6,18 @@
     <title>Libri</title>
 </head>
 <body>
-    <div class="libri">
-        <p>Qui verranno mostrati i libri con i rispettivi autori</p>
-        <% rows.forEach(row => { %>
-             <ul>
-                <li>Titolo: <%= row.titolo %> </li>
-                <li>Autore: <%= row.nome %> </li>
-            </ul>
-        <% }) %>
-    </div>
-    </div>
+    <% if (typeof rows === 'undefined') { %>
+        <p>Contattare l'amministratore per il database</p>
+    <% } else { %>
+        <div class="libri">
+            <p>Qui verranno mostrati i libri con i rispettivi autori</p>
+            <% rows.forEach(row => { %>
+                <ul>
+                    <li>Titolo: <%= row.titolo %> </li>
+                    <li>Autore: <%= row.nome %> </li>
+                </ul>
+            <% }) %>
+        </div>
+    <% } %>
 </body>
 </html>
