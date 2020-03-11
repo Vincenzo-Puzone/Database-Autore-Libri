@@ -1,11 +1,9 @@
 const express = require('express');
 const morgan = require('morgan');
 const path = require('path');
-const bodyParser = require('body-parser');    
-const moment = require('moment');
+const bodyParser = require('body-parser');
 const favicon = require('serve-favicon');
 const sqlite3 = require('sqlite3');
-moment.locale('it');
 
 app = express();
 
@@ -37,11 +35,11 @@ app.get('/',(req,res)=>{
 app.post('/creadb',(req,res)=>{
     sql1='CREATE TABLE Autori(ID_autore int,nome text,cognome text,primary key (ID_autore))'
     db.run(sql1,(err)=>{
-        if (err) res.send('tabella gia creata');
+        if (err) res.status(500).sendFile(path.join(__dirname,'public','dbtables.html'));
         else {
             sql2='CREATE TABLE Libri(ID_libro int,titolo text,autore int,primary key (ID_libro),foreign key (autore) references Autori(ID_autore))'
             db.run(sql2,(err)=>{
-                if (err) res.send('tabella gia creata');
+                if (err) res.status(500).sendFile(path.join(__dirname,'public','dbtables.html'));
                 else res.redirect('/');
             });
         }
@@ -52,7 +50,7 @@ app.post('/addautore',(req,res)=>{
     const id=parseInt(req.body.id_autore);
     let sql = `INSERT INTO Autori(id_autore,nome,cognome) VALUES(${id},'${req.body.nome}','${req.body.cognome}')`;
     db.run(sql,(err)=>{
-        if (err) res.send('tabella inesistente');
+        if (err) res.status(500).sendFile(path.join(__dirname,'public','dberror.html'));
         else res.redirect('/');
     });
 });
@@ -83,7 +81,7 @@ app.post('/addlibri',(req,res)=>{
     const id=parseInt(req.body.id_libro);
     let sql = `INSERT INTO Libri(id_libro,titolo,autore) VALUES(${id},'${req.body.titolo}','${autore}')`;
     db.run(sql,(err)=>{
-        if (err) res.send('tabella inesistente');
+        if (err) res.status(500).sendFile(path.join(__dirname,'public','dberror.html'));
         else res.redirect('/');
     });
 });
