@@ -23,9 +23,14 @@ const db = new sqlite3.Database('./test.db',()=>{
 });
 
 app.get('/',(req,res)=>{
-    sql='select * from Autori INNER JOIN Libri ON id_autore=autore';
+    sql='select * from Autori';
     db.all(sql,(err,rows)=>{
-        res.render('admin',{rows})
+        autori=rows;
+        sql='select * from Libri';
+        db.all(sql,(err,rows)=>{
+            libri=rows
+            res.render('admin',{autori,libri})
+        });
     });
 });
 

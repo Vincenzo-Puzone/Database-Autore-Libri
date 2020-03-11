@@ -16,7 +16,7 @@
                 <td>Modifica</td>
                 <td>Elimina</td>
             </tr>
-            <% rows.forEach(autore => { %>
+            <% autori.forEach(autore => { %>
                 <tr>
                     <td> <%= autore.ID_autore %> </td>
                     <td> <%= autore.nome %> </td>
@@ -49,7 +49,7 @@
                 <td>Modifica</td>
                 <td>Elimina</td>
             </tr>
-            <% rows.forEach(libro => { %>
+            <% libri.forEach(libro => { %>
                 <tr>
                     <td> <%= libro.ID_libro %> </td>
                     <td> <%= libro.titolo %> </td>
@@ -66,7 +66,7 @@
                     <td> <input type="text" name="id_libro" value=""> </td>
                     <td> <input type="text" name="titolo" value=""> </td>
                     <td> <select name="autore">
-                        <% rows.forEach(autore => { %>
+                        <% autori.forEach(autore => { %>
                             <option value="<%= autore.ID_autore %>" > <%= autore.ID_autore %> - <%= autore.nome %> </option>
                         <% }) %> 
                         </select>   
