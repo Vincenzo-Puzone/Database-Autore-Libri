@@ -46,6 +46,20 @@ app.post('/creadb',(req,res)=>{
     });
 });
 
+app.post('/dropdb',(req,res)=>{
+    sql1='DROP TABLE Autori'
+    db.run(sql1,(err)=>{
+        if (err) res.status(500).sendFile(path.join(__dirname,'public','dbtables2.html'));
+        else {
+            sql2='DROP TABLE Libri'
+            db.run(sql2,(err)=>{
+                if (err) res.status(500).sendFile(path.join(__dirname,'public','dbtables2.html'));
+                else res.redirect('/');
+            });
+        }
+    });
+});
+
 app.post('/addautore',(req,res)=>{
     const id=parseInt(req.body.id_autore);
     let sql = `INSERT INTO Autori(id_autore,nome,cognome) VALUES(${id},'${req.body.nome}','${req.body.cognome}')`;
@@ -100,7 +114,10 @@ app.post('/modlibro',(req,res)=>{
     const id=parseInt(req.body.ID_libro);
     const autore=parseInt(req.body.autore);
     sql=`UPDATE Libri SET titolo='${req.body.titolo}', autore=${autore} WHERE Libri.id_libro = ${id}`;
-    db.run(sql)
+    db.run(sql,(err)=>{
+        if (err) res.status(500).sendFile(path.join(__dirname,'public','dberror.html'));
+        else res.redirect('/');
+    });
     res.redirect("/");
 });
 
