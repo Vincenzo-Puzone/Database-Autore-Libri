@@ -6,6 +6,7 @@ const favicon = require('serve-favicon');
 const sqlite3 = require('sqlite3');
 
 app = express();
+const port = 8080;
 
 app.set('views',path.join(__dirname,"views"));
 app.set('view engine', 'ejs');
@@ -15,8 +16,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use( morgan('dev') );
 
 const db = new sqlite3.Database('./test.db',()=>{
-    app.listen(8080);
-    console.log('Server running on http://localhost:8080');
+    app.listen(port);
+    console.log(`Server running on http://localhost:${port}`);
     console.log('database open')
 });
 
