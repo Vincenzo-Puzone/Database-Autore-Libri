@@ -1,10 +1,11 @@
 body{
     font-family: 'Courier New', Courier, monospace;
 }
-.obj_on_disk{
-    margin: 10px;
-    margin-left: 0px;
+
+table, th, td {
+    border: 1px solid black;
 }
+
 .modello{
     margin-bottom: 0px;
 }
@@ -13,15 +14,15 @@ body{
     margin: 0px;
 }
 
-.date{
-    margin: 0px;
-}
-
 .titolo{
     margin-bottom: 0px;
 }
 
 .intestazione{
+    display: inline;
+}
+
+.db{
     display: inline;
 }
 
@@ -34,6 +35,3 @@ body{
     display: inline;
 }
 
-table, th, td {
-    border: 1px solid black;
-}
