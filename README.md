@@ -1,4 +1,4 @@
-## INITIAL RELEASE
+## Database Autore-Libri
 
 Le tabelle possono essere create usando il pannello admin. Se le tabelle non vengono create dare questi due comandi al db tramite sqlite3 da terminale linux una volta che nodejs ha creato il file :
 
